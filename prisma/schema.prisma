@@ -10,53 +10,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model users {
 	id Int @id @default(autoincrement())
 	email String @unique
 	password String
 }
 
-model Categories {
+model categories {
 	id Int @id @default(autoincrement())
 	name String @unique
-  test Tests[]
+  test tests[]
 }
 
-model Tests {
+model tests {
 	id Int @id @default(autoincrement())
 	name String
   pdfUrl String
-  category Categories @relation(fields: [categoryId], references: [id])
+  category categories @relation(fields: [categoryId], references: [id])
   categoryId Int
-  teacherDiscipline TeachersDisciplines @relation(fields: [teacherDisciplineId], references: [id])
+  teacherDiscipline teachersDisciplines @relation(fields: [teacherDisciplineId], references: [id])
   teacherDisciplineId Int
 }
 
-model TeachersDisciplines {
+model teachersDisciplines {
 	id Int @id @default(autoincrement())
-  teacher Teachers @relation(fields: [teacherId], references: [id])
+  teacher teachers @relation(fields: [teacherId], references: [id])
 	teacherId Int
-  discipline Disciplines @relation(fields: [disciplineId], references: [id])
+  discipline disciplines @relation(fields: [disciplineId], references: [id])
   disciplineId Int
-  test Tests[] 
+  test tests[] 
 }
 
-model Teachers {
+model teachers {
 	id Int @id @default(autoincrement())
 	name String @unique
-  teacherDiscipline TeachersDisciplines[]
+  teacherDiscipline teachersDisciplines[]
 }
 
-model Disciplines {
+model disciplines {
 	id Int @id @default(autoincrement())
 	name String @unique
-  term Terms @relation(fields: [termId], references: [id])
+  term terms @relation(fields: [termId], references: [id])
   termId Int
-  teacherDiscipline TeachersDisciplines[]
+  teacherDiscipline teachersDisciplines[]
 }
 
-model Terms {
+model terms {
 	id Int @id @default(autoincrement())
 	number Int @unique
-  discipline Disciplines[] 
+  discipline disciplines[] 
 }
